@@ -41,7 +41,7 @@ function pointing_controller_create
     local w0 to (1.0 / tuning_time).
     self:add("Kp", w0^2).
     self:add("Kd", 1.4142 * w0).
-    self:add("show_vectors", true).
+    self:add("show_vectors", show_vectors).
 
     if self["show_vectors"]
     {
