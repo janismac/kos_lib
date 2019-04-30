@@ -94,9 +94,7 @@ function pointing_controller_update
     {
         // sliding mode controller
         local angular_vel_reference to 
-            - attitude_error_dir_body 
-            * signsqrt(2 * abs(attitude_error_mag) * max_angular_acceleration).
-
+            - attitude_error_dir_body * sqrt(2 * attitude_error_mag * max_angular_acceleration).
         set angular_accel_body to -self["Kd"] * (angular_vel_body - angular_vel_reference).
     }
 
@@ -113,12 +111,4 @@ function pointing_controller_update
     set ship:control:roll  to -angular_accel_body:z / max_angular_acceleration.
 
     return attitude_error_mag.
-}
-
-function signsqrt
-{
-    parameter x.
-    if x > 0 { return sqrt(x). }
-    if x < 0 { return -sqrt(-x). }
-    return 0.
 }
